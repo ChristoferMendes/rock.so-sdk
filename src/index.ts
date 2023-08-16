@@ -2,9 +2,9 @@ import axios, { AxiosInstance, AxiosError } from "axios";
 import { CreateNoteRequest, CreateTaskRequest, Priority } from "./types";
 
 export class RockApi {
-  baseUrl = "https://api.rock.so/webhook/bot";
-  api: AxiosInstance;
-  token: string;
+  private readonly baseUrl = "https://api.rock.so/webhook/bot";
+  private readonly api: AxiosInstance;
+  private readonly token: string;
 
   constructor(token: string) {
     this.token = token;
