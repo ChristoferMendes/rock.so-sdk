@@ -17,7 +17,6 @@ export class RockApi {
     return this.api.post("", { text }, { params: { method: "sendMessage" } });
   }
 
-  
   createNote({ body, labels, watchers }: CreateNoteRequest) {
     return this.api.post(
       "",
@@ -71,9 +70,8 @@ export class RockApi {
   }
 
   private _get(method: string) {
-    return this.api.get("", { params: { method } })
+    return this.api.get("", { params: { method } });
   }
-
 
   private _initParamsInterceptor() {
     this.api.interceptors.request.use((config) => {
@@ -90,7 +88,7 @@ export class RockApi {
 
   private async _authenticate() {
     try {
-      await this.api.get("", { params: { method: "getBotInfo" } });
+      await this.getBotInfo();
     } catch (e) {
       const err = e as AxiosError;
 
@@ -101,5 +99,4 @@ export class RockApi {
       console.error("Your bot failed to initialize:", err.message);
     }
   }
-
 }
