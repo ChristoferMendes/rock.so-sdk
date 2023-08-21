@@ -113,7 +113,7 @@ describe("Rock Api", () => {
   describe("Send message", () => {
     it("should send a message", async () => {
       const { status, data } = await api.sendMessage(
-        "[ROCK.SO-SDK] Message sent by automated tests of *rock.so-sdk*"
+        "*[ROCK.SO-SDK]* Message sent by automated tests of *rock.so-sdk*"
       );
 
       if (!data.id) {

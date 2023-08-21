@@ -10,6 +10,8 @@ const rockApi = new RockApi(process.env.ROCK_BOT_TOKEN)
 rockApi.sendMessage('Hello!')
 ```
 
+### This SDK is highly typed, with all methods from  [Rock.so Public Api](https://www.rock.so/public-api) being mapped and exported!
+
 ## METHODS
 
 All methods available on [Rock.so Public Api](https://www.rock.so/public-api) are available on the SDK, i.e.:
@@ -31,7 +33,7 @@ All methods available on [Rock.so Public Api](https://www.rock.so/public-api) ar
 
 ### Send Message
 ```typescript
-rockApi.sendMessage('Hello')
+await rockApi.sendMessage('Hello')
 
 ```
 
@@ -83,30 +85,30 @@ await rockApi.createTask({
 
 ### Get Bot Info
 ```typescript
-const botInfo = await rockApi.getBotInfo();
+const { data } = await rockApi.getBotInfo();
 ```
 
 ### Get Custom Fields
 ```typescript
-const customFields = await rockApi.getCustomFields();
+const { data } = await rockApi.getCustomFields();
 ```
 
 ### Get Task Lists
 ```typescript
-const tasksList = await rockApi.getTaskLists();
+const { data } = await rockApi.getTaskLists();
 ```
 
 ### List Labels 
 ```typescript
-const labels = await rockApi.listLabels();
+const { data } = await rockApi.listLabels();
 ```
 
 ### List Space Members
 ```typescript
-const spaceMembers = await rockApi.listSpaceMembers();
+const { data } = await rockApi.listSpaceMembers();
 ```
 
 ### List Sprints
 ```typescript
-const sprints = await rockApi.listSprints();
+const { data } = await rockApi.listSprints();
 ```
