@@ -3,9 +3,11 @@
   "version": "1.0.6",
   "description": "",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "dev": "tsx src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "tsx src/tests/rockApi.spec.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +18,7 @@
   "dependencies": {
     "@types/node": "^20.5.0",
     "axios": "^1.4.0",
-    "reflect-metadata": "^0.1.13",
+    "dotenv": "^16.3.1",
     "tsx": "^3.12.7"
   },
   "repository": {

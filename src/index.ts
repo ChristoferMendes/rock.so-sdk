@@ -1,5 +1,20 @@
 import axios, { AxiosInstance, AxiosError } from "axios";
-import { CreateNoteRequest, CreateTaskRequest, Priority } from "./types";
+import {
+  CreateNoteRequest,
+  CreateTaskRequest,
+  PriorityEnum,
+} from "./types/payloads.types";
+import {
+  CreateNoteResponse,
+  CreateTaskResponse,
+  GetBotInfoResponse,
+  GetCustomFieldsResponse,
+  GetTaskListsResponse,
+  ListLabelsResponse,
+  ListSpaceMembersResponse,
+  ListSprintsResponse,
+  SendMessageResponse,
+} from "./types/responses.types";
 
 export class RockApi {
   private readonly baseUrl = "https://api.rock.so/webhook/bot";
@@ -14,21 +29,20 @@ export class RockApi {
   }
 
   sendMessage(text: string) {
-    return this.api.post("", { text }, { params: { method: "sendMessage" } });
+    return this._post<SendMessageResponse>({ text }, "sendMessage");
   }
 
-  createNote({ body, labels, watchers }: CreateNoteRequest) {
-    return this.api.post(
-      "",
+  createNote({ body, labels, watchersIds: watchers }: CreateNoteRequest) {
+    return this._post<CreateNoteResponse>(
       { body, labels, watchers },
-      { params: { method: "createNote" } }
+      "createNote"
     );
   }
 
   createTask(payload: CreateTaskRequest) {
     this._validateCreateTaskPayload(payload);
 
-    return this.api.post("", { payload }, { params: { method: "createTask" } });
+    return this._post<CreateTaskResponse>(payload, "createTask");
   }
 
   private _validateCreateTaskPayload(payload: CreateTaskRequest) {
@@ -36,7 +50,7 @@ export class RockApi {
       keyof CreateTaskRequest
     >;
 
-    const priorityValues = Object.values(Priority);
+    const priorityValues = Object.values(PriorityEnum);
 
     if (!priorityValues.includes(payload.priority)) {
       throw new Error(`Invalid priority value: ${payload.priority}`);
@@ -50,27 +64,55 @@ export class RockApi {
   }
 
   getBotInfo() {
-    return this._get("getBotInfo");
+    return this._get<GetBotInfoResponse>("getBotInfo");
   }
 
   getCustomFields() {
-    return this._get("getCustomFields");
+    return this._get<GetCustomFieldsResponse>("getCustomFields");
   }
 
   getTaskLists() {
-    return this._get("getTaskLists");
+    return this._get<GetTaskListsResponse>("getTaskLists");
   }
 
   listLabels() {
-    return this._get("listLabels");
+    return this._get<ListLabelsResponse>("listLabels");
   }
 
   listSpaceMembers() {
-    return this._get("listSpaceMembers");
+    return this._get<ListSpaceMembersResponse>("listSpaceMembers");
   }
 
-  private _get(method: string) {
-    return this.api.get("", { params: { method } });
+  listSprints() {
+    return this._get<ListSprintsResponse>("listSprints");
+  }
+
+  private async _get<TData>(method: string) {
+    try {
+      return await this.api.get<TData>("", { params: { method } });
+    } catch (e) {
+      const err = e as AxiosError;
+
+      if (err.response?.status === 401) {
+        throw new Error("Invalid token");
+      }
+
+      throw err;
+    }
+  }
+
+  private async _post<TData>(body: any, method: string) {
+    try {
+      return await this.api.post<TData>("", body, { params: { method } });
+    } catch (e) {
+      const err = e as AxiosError;
+
+      if (err.response?.status === 401) {
+        throw new Error("Invalid token");
+      }
+
+      throw err;
+    }
   }
 
   private _initParamsInterceptor() {
