@@ -15,7 +15,7 @@ describe("Rock Api", () => {
 
   after(() => {
     api.sendMessage(
-      "*[ROCK.SO-SDK]* Tests have been completed and passed successfully!"
+      " *[ROCK SDK]* Tests have been completed and passed successfully!"
     );
   });
 
@@ -113,7 +113,7 @@ describe("Rock Api", () => {
   describe("Send message", () => {
     it("should send a message", async () => {
       const { status, data } = await api.sendMessage(
-        "*[ROCK.SO-SDK]* Message sent by automated tests of *rock.so-sdk*"
+        "*[ROCK SDK]* Message sent by automated tests of *rock.so-sdk*"
       );
 
       if (!data.id) {
@@ -137,7 +137,7 @@ describe("Rock Api", () => {
       const { status, data } = await api.createNote({
         body: [
           {
-            text: "[ROCK.SO-SDK] Note created by automated tests of rock.so-sdk",
+            text: "[ROCK SDK] Note created by automated tests of rock.so-sdk",
           },
         ],
       });
@@ -163,13 +163,13 @@ describe("Rock Api", () => {
       const { status, data } = await api.createTask({
         body: [
           {
-            text: "[ROCK.SO-SDK] Task body created by automated tests of rock.so-sdk",
+            text: "[ROCK SDK] Task body created by automated tests of rock.so-sdk",
           },
         ],
         listId: ListIdStatusEnum.DOING,
         priority: PriorityEnum.HIGHEST,
         title:
-          "[ROCK.SO-SDK] Task title created by automated tests of rock.so-sdk",
+          "[ROCK SDK] Task title created by automated tests of rock.so-sdk",
       });
 
       if (!data.id) {
