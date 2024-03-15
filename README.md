@@ -3,7 +3,7 @@
 ## BASIC USAGE
 
 ```typescript
-import { RockAPi } from 'rock.so-api'
+import { RockAPi } from 'rock.so-sdk'
 
 const rockApi = new RockApi(process.env.ROCK_BOT_TOKEN)
 
