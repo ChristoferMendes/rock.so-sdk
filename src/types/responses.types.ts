@@ -39,6 +39,7 @@ export type ListLabelsResponse = {
 
 export type SpaceMember = {
   id: number;
+  userId: string;
   role: string;
   state: string;
   invitedAt: string;
