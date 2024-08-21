@@ -1,10 +1,10 @@
-import axios, { AxiosInstance, AxiosError } from "axios";
+import axios, { type AxiosInstance, type AxiosError } from "axios";
 import {
-  CreateNoteRequest,
-  CreateTaskRequest,
+  type CreateNoteRequest,
+  type CreateTaskRequest,
   PriorityEnum,
 } from "./types/payloads.types";
-import {
+import type {
   CreateNoteResponse,
   CreateTaskResponse,
   GetBotInfoResponse,
@@ -21,8 +21,8 @@ export class RockApi {
   private readonly api: AxiosInstance;
   private readonly token: string;
 
-  constructor(token: string) {
-    this.token = token;
+  constructor(token?: string) {
+    this.token = token ?? process.env.ROCK_API_TOKEN ?? "";
     this.api = axios.create({ baseURL: this.baseUrl });
     this._initParamsInterceptor();
     this._authenticate();
@@ -35,7 +35,7 @@ export class RockApi {
   createNote({ body, labels, watchersIds: watchers }: CreateNoteRequest) {
     return this._post<CreateNoteResponse>(
       { body, labels, watchers },
-      "createNote"
+      "createNote",
     );
   }
 

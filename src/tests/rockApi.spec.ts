@@ -1,4 +1,4 @@
-import { after, beforeEach, describe, it } from "node:test";
+import { after, describe, it } from "node:test";
 import { RockApi } from "..";
 import assert from "node:assert";
 import { config } from "dotenv";
@@ -7,15 +7,14 @@ import { ListIdStatusEnum, PriorityEnum } from "../types/payloads.types";
 config();
 
 describe("Rock Api", () => {
-  let api: RockApi;
-
-  beforeEach(() => {
-    api = new RockApi(process.env.ROCK_API_TOKEN ?? "");
-  });
+  const api = new RockApi(process.env.ROCK_API_TOKEN ?? "");
 
   after(() => {
     api.sendMessage(
-      " *[ROCK SDK]* Tests have been completed and passed successfully!"
+      ` *[ROCK SDK]* Tests have been completed and passed successfully!
+
+      New package version update is available: (https://www.npmjs.com/package/rock.so-sdk
+      `,
     );
   });
 
@@ -34,7 +33,7 @@ describe("Rock Api", () => {
 
       assert.deepStrictEqual(
         Object.keys(botInfo),
-        Object.keys(expectedObjectShape)
+        Object.keys(expectedObjectShape),
       );
     });
   });
@@ -57,7 +56,7 @@ describe("Rock Api", () => {
 
       assert.deepStrictEqual(
         Object.keys(customFields),
-        Object.keys(expectedObjectShape)
+        Object.keys(expectedObjectShape),
       );
     });
   });
@@ -113,7 +112,7 @@ describe("Rock Api", () => {
   describe("Send message", () => {
     it("should send a message", async () => {
       const { status, data } = await api.sendMessage(
-        "*[ROCK SDK]* Message sent by automated tests of *rock.so-sdk*"
+        "*[ROCK SDK]* Message sent by automated tests of *rock.so-sdk*",
       );
 
       if (!data.id) {
@@ -126,7 +125,7 @@ describe("Rock Api", () => {
 
       assert.deepStrictEqual(
         Object.keys(data),
-        Object.keys(expectedObjectShape)
+        Object.keys(expectedObjectShape),
       );
       assert.strictEqual(status, 200);
     });
@@ -152,7 +151,7 @@ describe("Rock Api", () => {
 
       assert.deepStrictEqual(
         Object.keys(data),
-        Object.keys(expectedObjectShape)
+        Object.keys(expectedObjectShape),
       );
       assert.strictEqual(status, 200);
     });
@@ -182,7 +181,7 @@ describe("Rock Api", () => {
 
       assert.deepStrictEqual(
         Object.keys(data),
-        Object.keys(expectedObjectShape)
+        Object.keys(expectedObjectShape),
       );
       assert.strictEqual(status, 200);
     });
