@@ -9,8 +9,8 @@ config();
 describe("Rock Api", () => {
   const api = new RockApi(process.env.ROCK_API_TOKEN ?? "");
 
-  after(() => {
-    api.sendMessage(
+  after(async () => {
+    await api.sendMessage(
       ` *[ROCK SDK]* Tests have been completed and passed successfully!
 
       New package version update is available: (https://www.npmjs.com/package/rock.so-sdk
