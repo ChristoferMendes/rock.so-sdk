@@ -11,10 +11,7 @@ describe("Rock Api", () => {
 
   after(async () => {
     await api.sendMessage(
-      ` *[ROCK SDK]* Tests have been completed and passed successfully!
-
-      New package version update is available: (https://www.npmjs.com/package/rock.so-sdk
-      `,
+      ' *[ROCK SDK]* Tests have been completed and passed successfully!\n\nNew package version update is available: https://www.npmjs.com/package/rock.so-sdk'',
     );
   });
 
