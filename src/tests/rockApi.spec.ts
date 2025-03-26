@@ -166,6 +166,7 @@ describe("Rock Api", () => {
         priority: PriorityEnum.HIGHEST,
         title:
           "[ROCK SDK] Task title created by automated tests of rock.so-sdk",
+        watchers: ["mAmm237A"],
       });
 
       if (!data.id) {

@@ -61,5 +61,5 @@ export interface CreateTaskRequest {
   recurringSchedule?: RecurringSchedule;
   customFields?: string[];
   labels?: string[];
-  watchersIds?: string[];
+  watchers?: string[];
 }
